@@ -1,0 +1,39 @@
+Socket programming in java for implementing the simplex unrestricted protocol of data link layer using TCP. There are two codes, one for the server and one for the client.
+
+Simplex unrestricted protocol is a protocol in the data link layer of the OSI model of computer networks.
+
+This protocol is for noiseless channels where it's assumed that there is no error or loss of data during transmission. There is no mechanism for error control or flow control. It is a unidirectional model, which means only one side can send data and another side receives the data. 
+
+This protocol has two sides, a sender and a receiver.  No sequence numbers or acknowledgments are used. The sender has no way to know whether the receiver received the data or not. The sender and receiver are always ready to send or receive data.
+
+ 
+Algorithm of Simplex Protocol for Sender Site
+
+begin
+   do
+      Wait_For_Event();      //wait for availability of packet
+      if ( Event(Frame_Available)) then
+         Get_Data_From_Network_Layer();
+         Make_Frame();
+         Send_Frame_To_Physical_Layer();
+      end if
+end
+
+Algorithm of Simplex Protocol for Receiver Site
+
+begin
+   do
+      Wait_For_Event();      //wait for arrival of frame
+      if ( Event(Frame_Arrival)) then
+         Receive_Frame_From_Physical_Layer();
+         Extract_Data();
+         Deliver_Data_To_Network_Layer();
+      end if
+end
+
+In the code here, we have first establised a connection using TCP.
+In the client side, we took input from the user and converted it into byte frames and each frame is send one by one. On the server side,
+we are receiving the frames one by one and then we are combining them to form the original message.
+The client side is sending the data and the server side is receiving it.
+
+This protocol is not all trustfull as no acknowedgement is there so data can be lost without our knowledge.
